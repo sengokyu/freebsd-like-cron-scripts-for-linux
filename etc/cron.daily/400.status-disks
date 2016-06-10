@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+echo ""
+echo "Disk status:"
+
+if [ -n "${daily_status_disks_ignore}" ] ; then
+	ignore="egrep -v ${daily_status_disks_ignore}"
+else
+	ignore="cat"
+fi
+(df -l -H | ${ignore}) && rc=1 || rc=3
+
+	# display which filesystems need backing up
+#	if [ -s /etc/dumpdates ]; then
+#		if ! [ -f /etc/fstab ]; then
+#			export PATH_FSTAB=/dev/null
+#		fi
+#
+#		echo ""
+#		dump W || rc=3
+#	fi
+
+exit $rc

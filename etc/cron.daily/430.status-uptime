@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+echo ""
+echo "Local system status:"
+prog=uptime
+
+rc=0
+rc=$($prog | tee /dev/stderr | wc -l)
+if [ $? -eq 0 ]
+then
+    [ $rc -gt 1 ] && rc=1
+else
+    rc=3
+fi
+
+exit $rc

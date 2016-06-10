@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+if [ ! -x /usr/bin/mailq ]
+then
+    echo '$daily_status_mailq_enable is set but /usr/bin/mailq' \
+	"isn't executable"
+    rc=2
+else
+    echo ""
+    echo "Mail in local queue:"
+
+    rc=$(mailq | tee /dev/stderr |
+		egrep -v 'Mail queue is empty' | wc -l)
+    [ $rc -gt 0 ] && rc=1 || rc=0
+fi
+
+exit $rc

@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+daily_status_ntpd_enable=YES
+rc=0
+
+case "$daily_status_ntpd_enable" in
+    [Yy][Ee][Ss])
+	echo ""
+	echo "NTP status:"
+
+	synchronized=$(ntpq -pn | tee /dev/stderr | grep '^\*')
+	if [ -z "$synchronized" ]; then
+		rc=1
+	fi
+	;;
+esac
+
+exit $rc

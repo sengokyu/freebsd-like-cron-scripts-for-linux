@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+run-parts /etc/cron.security && rc=1 || rc=3
+
+exit $rc

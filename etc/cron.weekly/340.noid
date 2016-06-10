@@ -1,0 +1,17 @@
+#!/bin/sh -
+#
+# $FreeBSD$
+#
+
+weekly_noid_dirs=/
+
+echo ""
+echo "Check for files with an unknown user or group:"
+
+rc=$(find -H ${weekly_noid_dirs:-/} \
+	  \( ! -fstype ext3,ext4 -prune -or -name \* \) -and \
+	  \( -nogroup -or -nouser \) -print | sed 's/^/  /' |
+	    tee /dev/stderr | wc -l)
+[ $rc -gt 1 ] && rc=1
+
+exit $rc
