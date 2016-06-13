@@ -31,12 +31,8 @@
 #
 security_status_ipfwlimit_enable=NO
 
-security_daily_compat_var security_status_ipfwlimit_enable
-
-rc=0
-
-if check_yesno_period security_status_ipfwlimit_enable
-then
+case "${security_status_ipfwlimit_enable}" in
+    [Yy][Ee][Ss])
 	IPFW_VERBOSE=`sysctl -n net.inet.ip.fw.verbose 2> /dev/null`
 	if [ $? -ne 0 ] || [ "$IPFW_VERBOSE" -eq 0 ]; then
 		exit 0
@@ -57,6 +53,9 @@ then
 		cat ${TMP}
 	fi
 	rm -f ${TMP}
-fi
+	;;
+    *)
+	rc=0;;
+esac
 
 exit $rc
