@@ -29,11 +29,11 @@
 
 rc=0
 
-echo ""
 echo 'Checking for passwordless accounts:'
 n=$(awk -F: 'NF > 1 && $1 !~ /^[#+-]/ && $2=="" {print $0}' /etc/shadow |
     tee /dev/stderr | wc -l)
 [ $n -gt 0 ] && rc=1 || rc=0
 
+echo ""
 
 exit "$rc"

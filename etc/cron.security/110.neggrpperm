@@ -30,7 +30,6 @@
 
 rc=0
 
-echo ""
 echo 'Checking negative group permissions:'
 MP=`mount -t ext4,ext3 | awk '$0 !~ /no(suid|exec)/ { print $3 }'`
 n=$(find $MP /dev/null -xdev -type f \
@@ -40,4 +39,5 @@ n=$(find $MP /dev/null -xdev -type f \
 	    -exec ls -liTd \{\} \+ | tee /dev/stderr | wc -l)
 	[ $n -gt 0 ] && rc=1 || rc=0
 
+echo ""
 exit $rc
