@@ -31,11 +31,11 @@
 
 rc=0
 
-echo ""
 echo 'Checking setuid files and devices:'
 MP=`mount -t ext4,ext3 | awk '$0 !~ /no(suid|exec)/ { print $3 }'`
 find $MP /dev/null -xdev -type f \
      \( -perm -u+x -or -perm -g+x -or -perm -o+x \) \
-     \( -perm -u+s -or -perm -g+s \) -exec ls -liTd \{\} \+ |
+     \( -perm -u+s -or -perm -g+s \) -exec ls -lid --full-time \{\} \+ |
     check_diff setuid - "${host} setuid diffs:"
 rc=$?
+echo ""
