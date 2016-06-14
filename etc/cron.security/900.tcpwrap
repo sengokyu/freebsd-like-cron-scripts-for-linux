@@ -50,11 +50,11 @@ catmsgs() {
 
 rc=0
 
-echo ""
 echo "${host} refused connections:"
 n=$(catmsgs | grep -i "^$yesterday.*refused connect" |
     tee /dev/stderr | wc -l)
 [ $n -gt 0 ] && rc=1 || rc=0
 
+echo ""
 
 exit $rc
