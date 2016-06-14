@@ -3,7 +3,6 @@
 # $FreeBSD$
 #
 
-echo ""
 echo "Disk status:"
 
 if [ -n "${daily_status_disks_ignore}" ] ; then
@@ -22,5 +21,7 @@ fi
 #		echo ""
 #		dump W || rc=3
 #	fi
+
+echo ""
 
 exit $rc

@@ -4,11 +4,12 @@
 #
 
 
-echo ""
 echo "Network interface status:"
 
 flags="${daily_status_network_netstat_flags}"
 
 ip -stats ${flags} link && rc=0 || rc=3
+
+echo ""
 
 exit $rc

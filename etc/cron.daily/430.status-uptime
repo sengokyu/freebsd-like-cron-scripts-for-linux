@@ -3,7 +3,6 @@
 # $FreeBSD$
 #
 
-echo ""
 echo "Local system status:"
 prog=uptime
 
@@ -15,5 +14,7 @@ then
 else
     rc=3
 fi
+
+echo ""
 
 exit $rc
