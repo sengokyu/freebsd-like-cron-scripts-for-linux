@@ -33,9 +33,9 @@ rc=0
 echo 'Checking negative group permissions:'
 MP=`mount -t ext4,ext3 | awk '$0 !~ /no(suid|exec)/ { print $3 }'`
 n=$(find $MP /dev/null -xdev -type f \
-	    \( \( ! -perm +010 -and -perm +001 \) -or \
-	    \( ! -perm +020 -and -perm +002 \) -or \
-	    \( ! -perm +040 -and -perm +004 \) \) \
+	    \( \( ! -perm /010 -and -perm /001 \) -or \
+	    \( ! -perm /020 -and -perm /002 \) -or \
+	    \( ! -perm /040 -and -perm /004 \) \) \
 	    -exec ls -liTd \{\} \+ | tee /dev/stderr | wc -l)
 	[ $n -gt 0 ] && rc=1 || rc=0
 
